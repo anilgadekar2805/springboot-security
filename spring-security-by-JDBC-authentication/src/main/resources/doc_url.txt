@@ -1,0 +1,1 @@
+Doc url for schema  = https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#user-schema
