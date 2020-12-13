@@ -21,8 +21,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		// it's default configuration provided by spring security with Embedded H2 database, with predefined schema and user provided data
-		
+		/** 
+		 * it's default configuration provided by spring security with Embedded H2 database, 
+		 * with predefined schema 
+		*/
 		/*
 		auth.jdbcAuthentication()
 		.dataSource(dataSource)
@@ -39,11 +41,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				);
 		*/
 		
+		/**
+		 * dataSource reference first check is there any embedded DB is there, then no need to 
+		 * external configuration to connect to DB.
+		 *  Here we use H2 Embedded database.
+		 *  we provide and user defined schema with import data into it when application booting time.
+		 *  all schema present inside resources file.
+		 * */
 		auth.jdbcAuthentication()
 		.dataSource(dataSource);
-
-		
 	}
+	
+	/**
+	 * Authorize each request URL coming from user, 
+	 * which is allowed for to do this operation or not for respective role of user.
+	 * */
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -54,6 +66,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.and().formLogin();
 	}
 	
+	/**
+	 * Password encryption mechanism to perform password must be decrypt,
+	 * which is not available as a plane text format to store 
+	 * */
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
