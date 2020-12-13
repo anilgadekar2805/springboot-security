@@ -42,6 +42,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		*/
 		
 		/**
+		 * use this configuration when we connect to external database like Oracle DB
+		 * with provided fields and validate user with there credential .
+		 * configuring database connection using properties file  
+		 * */
+		
+		/*
+		auth.jdbcAuthentication()
+		.dataSource(dataSource)
+		.usersByUsernameQuery("select username,password,enabled "
+				+"from users "
+				+ "where username = ?")
+		.authoritiesByUsernameQuery("select username,authority "
+				+ "from authorities "
+				+ "where username = ?");
+		*/
+		
+		/**
 		 * dataSource reference first check is there any embedded DB is there, then no need to 
 		 * external configuration to connect to DB.
 		 *  Here we use H2 Embedded database.
